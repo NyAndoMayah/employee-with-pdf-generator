@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>Fiche Employé</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: xx-small;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            overflow: hidden;
+        }
+        .employee-container {
+            overflow: hidden;
+        }
+        .employee-info {
+            float: right;
+            width: 40%;
+        }
+        .employee-image {
+            float: left;
+            width: 60%;
+            height: 250px;
+            text-align: center;
+        }
+        .employee-image img {
+            width: 300px;
+            height: 200px;
+        }
+        .salary-info {
+            margin: 20px;
+            padding: 5px;
+        }
+        .footer {
+            clear: both;
+            padding: 10px;
+            height: 10%;
+            margin-top: 60%;
+            border-top: black 1px solid;
+        }
+        .footer-section {
+            float: left;
+            width: 30%;
+            padding: 10px;
+        }
+        .footer-section img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="employee-container">
+        <div class="employee-image">
+            <img th:src="${templateEmployee.stringImage}" alt="no image" width="100"></img>
+        </div>
+        <div class="employee-info">
+            <h2>FICHE EMPLOYÉ</h2>
+            <p>Numéro matricule: <span th:text="${templateEmployee.registrationNumber}"></span></p>
+            <p>Noms: <span th:text="${templateEmployee.lastName}"></span></p>
+            <p>Prénoms: <span th:text="${templateEmployee.firstName}"></span></p>
+            <p>Age: <span th:text="${age}"></span></p>
+            <p>Date d'embauche: <span th:text="${templateEmployee.entranceDate}"></span></p>
+            <p>Date de départ: <span th:text="${templateEmployee.departureDate}"></span></p>
+            <p>Numéro CNAPS: <span th:text="${templateEmployee.cnaps}"></span></p>
+        </div>
+    </div>
+    <div class="salary-info">
+        <h3>Informations sur le salaire</h3>
+        <p>Salaire brut actuel : <span th:text="${templateEmployee.salary}"></span> Ariary/mois</p>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-section">
+        <img th:src="${company.logo}" alt="Company Logo" width="100" height="100"></img>
+    </div>
+    <div class="footer-section">
+        <p><strong>Nom de l'entreprise</strong></p>
+        <p><strong>NIF:</strong> [[${company.taxIdentity.nif}]]</p>
+        <p><strong>STAT:</strong> [[${company.taxIdentity.stat}]]</p>
+    </div>
+    <div class="footer-section">
+        <p><strong>Adresse de l'entreprise</strong></p>
+        <p>[[${company.address}]]</p>
+        <p><strong>Email:</strong> [[${company.email}]]</p>
+        <p><strong>Numéro Téléphone</strong></p>
+        <ul th:each="phone : ${company.phones}">
+            <li>[[${phone.value}]]</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
